@@ -5,5 +5,5 @@ import com.yourtaxi.service.demo.model.Car;
 
 public interface BookingService {
 
-    Car bookRide(Booking booking);
+    Booking bookRide(Booking booking);
 }

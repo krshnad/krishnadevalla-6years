@@ -2,7 +2,6 @@ package com.yourtaxi.service.demo.controller;
 
 import com.yourtaxi.service.demo.model.Car;
 import com.yourtaxi.service.demo.service.CarService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,8 +11,12 @@ import java.util.List;
 @RequestMapping("v1/cars")
 public class CarController {
 
-    @Autowired
+    final
     CarService carService;
+
+    public CarController(CarService carService) {
+        this.carService = carService;
+    }
 
     @GetMapping("/{carId}")
     public Car getcar(@PathVariable long carId) {
@@ -32,7 +35,7 @@ public class CarController {
     }
 
     @GetMapping("/{cars/type/{type}}")
-    public List<Car> getAvailableCarsByType(@PathVariable ("type") String type) {
+    public List<Car> getAvailableCarsByType(@PathVariable("type") String type) {
         return carService.findCarsByAvailabilityAndType(type);
     }
 

@@ -3,7 +3,6 @@ package com.yourtaxi.service.demo.controller;
 import com.yourtaxi.service.demo.model.Driver;
 import com.yourtaxi.service.demo.model.Location;
 import com.yourtaxi.service.demo.service.DriverService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,10 +12,11 @@ import java.util.List;
 @RequestMapping("v1/drivers")
 public class DriverController {
 
-    @Autowired
+    final
     DriverService driverService;
 
-    public DriverController() {
+    public DriverController(DriverService driverService) {
+        this.driverService = driverService;
     }
 
     @GetMapping("/{driverId}")
@@ -30,7 +30,6 @@ public class DriverController {
     public Driver createDriver(@RequestBody Driver driver) {
         return driverService.createDriver(driver);
     }
-
 
     @PutMapping("/{driverId}")
     public void updateLocation(
